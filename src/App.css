@@ -60,7 +60,7 @@ h1 {
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  width: 300px;
+  width: 250px;
   color: var(--white-color);
 }
 
@@ -74,6 +74,7 @@ h1 {
   border: none;
   padding: 0.55rem;
   cursor: pointer;
+  width: 100px;
 }
 
 .Todo {
@@ -85,6 +86,8 @@ h1 {
   padding: 0.75rem 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
+  width: 350px;
+  overflow-wrap: anywhere;
 }
 
 .fa-trash {
@@ -111,4 +114,15 @@ h1 {
   outline: none;
   background: var(--primary-color);
   color: #fff;
+}
+
+@media only screen and (max-width: 410px) {
+  
+  .todo-input{
+    width: 65%;
+  }
+  .todo-btn{
+    width: 35%;
+  }
+ 
 }
