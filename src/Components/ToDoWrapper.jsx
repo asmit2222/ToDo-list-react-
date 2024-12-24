@@ -15,7 +15,11 @@ function ToDoWrapper() {
       { id: new Date(), task: todo, completed: false, isEditing: false },
     ]);
   };
-  const deleteTodo = (id) => setTodos(todos.filter((todo) => todo.id !== id));
+  const deleteTodo = (id) => {
+    const cnf = confirm("are you sure want to delete");
+
+    if (cnf) setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
   const toggleCompleteTodo = (id) => {
     setTodos(
