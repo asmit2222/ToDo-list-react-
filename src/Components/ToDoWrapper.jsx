@@ -4,7 +4,11 @@ import EditTodoForm from "./EditTodoForm";
 import ToDo from "./ToDo";
 
 function ToDoWrapper() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const rawTodos = localStorage.getItem("todoreact");
+    if (!rawTodos) return [];
+    return JSON.parse(rawTodos);
+  });
   const addTodo = (todo) => {
     setTodos([
       ...todos,
@@ -35,6 +39,9 @@ function ToDoWrapper() {
       )
     );
   };
+
+  localStorage.setItem("todoreact", JSON.stringify(todos));
+
   return (
     <>
       <div className="TodoWrapper">
