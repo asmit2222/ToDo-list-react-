@@ -1,6 +1,17 @@
+import { deleteDoc, doc } from "firebase/firestore";
 import React from "react";
+import { db } from "../firebase";
 
-function ToDo({ task, deleteTodo, toggleComplete, editTodo }) {
+function ToDo({ task, toggleComplete, editTodo }) {
+  const deleteTodo = async (id) => {
+    const cnf = confirm("are you sure want to delete");
+
+    if (cnf) {
+      // setTodos(todos.filter((todo) => todo.id !== id));
+      await deleteDoc(doc(db, "todos", id));
+    }
+  };
+
   return (
     <>
       <div className="Todo">

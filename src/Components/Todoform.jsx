@@ -1,6 +1,8 @@
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import { db } from "../firebase";
 
-function Todoform({ addTodo }) {
+function Todoform() {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -10,7 +12,13 @@ function Todoform({ addTodo }) {
       setValue("");
     }
   };
-
+  const addTodo = async (value) => {
+    // setTodos([
+    //   ...todos,
+    //   { id: new Date(), task: todo, completed: false, isEditing: false },
+    // ]);
+    await addDoc(collection(db, "todos"), { todo: value });
+  };
   return (
     <div>
       <form className="Todoform" onSubmit={handleSubmit}>

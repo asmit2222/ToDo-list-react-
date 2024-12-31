@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
-function EditTodoForm({ editTodo, task }) {
+function EditTodoForm({ task }) {
   const [value, setValue] = useState(task.task);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     editTodo(value, task.id);
+  };
+  const editTodo = async (value, id) => {
+    const todoRef = doc(db, "todos", id);
+
+    await updateDoc(todoRef, {
+      todo: value,
+    });
   };
   return (
     <>
