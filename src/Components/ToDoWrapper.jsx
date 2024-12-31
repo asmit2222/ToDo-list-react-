@@ -7,6 +7,7 @@ import { db } from "../firebase";
 
 function ToDoWrapper() {
   const [todos, setTodos] = useState([]);
+  const [isEdited, setisEdited] = useState(true);
   // function ToDoWrapper() {
   //   const [todos, setTodos] = useState(() => {
   //     const rawTodos = localStorage.getItem("todoreact");
@@ -28,21 +29,25 @@ function ToDoWrapper() {
       )
     );
   };
+
   const editTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-      )
-    );
+    if (isEdited) {
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+        )
+      );
+      setisEdited(false);
+    }
   };
 
-  const editTask = (task, id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
-      )
-    );
-  };
+  // const editTask = (task, id) => {
+  //   setTodos(
+  //     todos.map((todo) =>
+  //       todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+  //     )
+  //   );
+  // };
 
   // localStorage.setItem("todoreact", JSON.stringify(todos));
 
@@ -54,7 +59,11 @@ function ToDoWrapper() {
 
         {todos.map((todo) =>
           todo.isEditing ? (
-            <EditTodoForm task={todo} />
+            <EditTodoForm
+              task={todo}
+              setisEdited={setisEdited}
+              isEdited={isEdited}
+            />
           ) : (
             <ToDo
               key={todo.id}
